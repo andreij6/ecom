@@ -21,7 +21,7 @@
         <td><%= product.title %></td>
         <td><%= show_price(product.price) %></td>
         <td><%= product.description %></td>
-        <td><%= product.image_url %></td>
+        <td><%= image_tag product.image_url %></td>
         <td><%= print_stock(product.stock) %></td>
         <td><%= button_to "Add to Cart", order_items_path(product_id: product.id) %></td>
         <td><%= link_to 'Show', product %></td>
