@@ -5,9 +5,10 @@ describe "Creating products" do
   
   def create_product(options={})
     options[:title] ||= "T-Shirt"
-    options[:price] ||= "T-Shirt"
-    options[:description] ||= "T-Shirt"
-    options[:image_url] ||= "T-Shirt"
+    options[:price] ||= 2.99
+    options[:description] ||= "This is a description"
+    options[:image_url] ||= "TShirt.png"
+    options[:stock] ||= 3
     
     visit "/products"
     click_link "New Product"
@@ -17,6 +18,8 @@ describe "Creating products" do
     fill_in "Price", with: options[:price]
     fill_in "Description", with: options[:description]
     fill_in "Image url", with: options[:image_url]
+    fill_in "Stock", with: options[:stock]
+    
     click_button "Create Product"
   end
   
