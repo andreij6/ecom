@@ -39,7 +39,11 @@ describe "Creating products" do
     
     visit "/products"
     expect(page).to_not have_content("Summer Classic White T-shirt")
-    
-    
+  end
+  
+  xit "displays an error when validations for stock are incorrect" do
+    #stock is a number
+    #stock is an integer
+    #stock is greater than or equal to zero
   end
 end
