@@ -6,6 +6,10 @@ Ecom::Application.routes.draw do
   resources :products
   
   root "products#index"
+  
+  match '/auth/:provider/callback', to: 'sessions#create', via: :get
+  match "/login" => redirect("/auth/twitter"), as: :login, via: :get
+  match "/logout" => "sessions#destroy", as: :logout, via: :get
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
