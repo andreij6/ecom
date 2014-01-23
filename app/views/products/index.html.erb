@@ -5,6 +5,7 @@
     <tr>
       <th>Title</th>
       <th>Price</th>
+      <th>Category</th>
       <th>Description</th>
       <th>Image url</th>
       <th>Stock</th>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= product.title %></td>
         <td><%= show_price(product.price) %></td>
+        <td><%= product.category %><td>
         <td><%= product.description %></td>
         <td><%= image_tag product.image_url %></td>
         <td><%= print_stock(product.stock) %></td>
