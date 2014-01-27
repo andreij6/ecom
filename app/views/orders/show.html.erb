@@ -1,0 +1,57 @@
+<h1>Your Order</h1>
+<%= form_for @order do |f| %>
+<table>
+  <tr>
+    <th>Customer</th>
+    <td><%= @order.user.name if @order.user %></td>
+  </tr>
+  <tr>
+    <th>Status:</th>
+    <td><%= @order.status %></td>
+  </tr>
+  <tr>
+    <th>Items:</th>
+    <td><%= @order.order_items.count %></td>
+  </tr>
+  <tr>
+    <th>Items</th>
+    <th>Title</th>
+    <th>Quantity</th>
+    <th>Stock</th>
+    <th>Unit Price</th>
+    <th>Subtotal</th>
+    <th>Total</th>
+  </tr>
+  <% count = 0 %>
+  <% @order.order_items.each do |item| %>
+	<tr>
+		<% count += 1%>
+		<td></td>
+		<td><%= item.product.title %></td>
+		<td><%= link_to item.quantity, edit_order_item_path(item) %></td>
+		<td><%= print_stock(item.product.stock, item.quantity) %></td>
+		<td><%= show_price(item.product.price) %></td>
+		<td><%= show_price item.subtotal %></td>
+	  <% if count == @order.order_items.count %>
+		<td><%= show_price @order.total %></td>
+	  <% else %>
+		<td></td>
+	  <%end%>
+	  	<td><%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+  <% end %>
+  	<tr>
+	  <th>Shipping To:</th>
+	  <td>
+	  	
+	    <%= f.select :address_id, current_user.addresses.collect{|a| [a.to_s, a.id]} %>
+	    <%= link_to "Add a new address", new_address_path %>
+	    
+	  </td>
+	</tr>
+</table>
+<%= f.submit "Submit Order" %>
+<% end %>
+<%= link_to "Empty Cart", @order, data: { confirm: 'Are you sure?' }, method: :delete %>
+
+<p><%= link_to 'Back to Store', products_url %></p>
